@@ -203,9 +203,12 @@ Solo tablas de tuberías.
 > sin ningún mensaje de error. A `<div align="center">` le pasa lo mismo con el
 > centrado.
 
-Para celdas con varios bloques, como las del Student Outcome, se usa `<br>` dentro
-de la celda. GitHub lo muestra como salto de línea y el filtro lo convierte en un
-salto real al exportar, así que el contenido no queda pegado.
+#### Saltos de línea dentro de una celda
+
+**Usa `<br>`.** Una fila entera tiene que caber en una sola línea del archivo, así
+que no puedes pulsar Enter dentro de una celda: si partes la línea, Markdown deja de
+ver una fila y la tabla se rompe. `<br>` es la forma de bajar de línea sin salir de
+esa línea.
 
 ```markdown
 | Criterio | Acciones realizadas |
@@ -213,7 +216,15 @@ salto real al exportar, así que el contenido no queda pegado.
 | Comunica oralmente | **Apellido, Nombre**<br>*AV1:* Lo que hizo.<br>*TB1:* Lo que hizo.<br><br>**Otro Apellido, Nombre**<br>*AV1:* Lo que hizo. |
 ```
 
-Es la única etiqueta HTML que sobrevive, y solo porque el filtro la traduce.
+Dos `<br>` seguidos dejan una línea en blanco, que es lo que separa a un integrante
+del siguiente.
+
+Sin esto, una celda como las del Student Outcome sale en el PDF como un párrafo
+corrido donde el nombre de una persona aparece en mitad de la frase de otra, y no se
+distingue quién hizo qué.
+
+`<br>` es la única etiqueta HTML que sobrevive al PDF, y solo porque
+`config/pdf-only.lua` la traduce a un salto de línea de verdad antes de exportar.
 
 ### Imágenes
 
