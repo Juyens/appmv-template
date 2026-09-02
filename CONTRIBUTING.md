@@ -170,12 +170,3 @@ En `docs/closing.md` hay un bloque que parece vacío y que **no se debe borrar**
 
 Marca el punto donde se inserta la lista de referencias. Sin él, Pandoc la pega al
 final de todo el documento, es decir después de los anexos.
-
-### Carátula
-
-`config/cover.tex` es un fragmento de LaTeX, no un documento, así que no compila por
-sí solo. Para verlo, abrir `config/preview/cover-preview.tex` y pulsar `Ctrl+Alt+V`;
-se recompila cada vez que se guarda.
-
-Solo se editan los datos: NRC, docente, equipo, proyecto, la tabla de integrantes
-—en orden alfabético por apellido, como exige el enunciado— y el mes.
