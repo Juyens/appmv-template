@@ -41,10 +41,10 @@ Invocación subyacente:
 
 ```
 pandoc $Chapters
-  --metadata-file=config/formato.yaml
+  --metadata-file=config/format.yaml
   --include-in-header=config/apa7.tex
-  --include-before-body=config/caratula.tex
-  --citeproc --csl=config/apa.csl --bibliography=referencias.bib
+  --include-before-body=config/cover.tex
+  --citeproc --csl=config/apa.csl --bibliography=references.bib
   --pdf-engine=xelatex
   --top-level-division=section
   --resource-path=".;docs"
@@ -59,10 +59,10 @@ README.md              Registro de versiones, Collaboration Insights, índice,
 docs/chapter_1..4.md   Capítulos I–IV
 docs/closing.md        Conclusiones, Glosario, Bibliografía, Anexos
 docs/images/           Assets; una subcarpeta por capítulo
-referencias.bib        Fuentes en BibTeX
-config/formato.yaml    Metadata de pandoc (idioma, papel, fuente, índice)
+references.bib         Fuentes en BibTeX
+config/format.yaml     Metadata de pandoc (idioma, papel, fuente, índice)
 config/apa7.tex        Preámbulo LaTeX con las reglas APA 7
-config/caratula.tex    Carátula (fragmento, no documento)
+config/cover.tex       Carátula (fragmento, no documento)
 config/preview/        Envoltorio para previsualizar la carátula
 config/apa.csl         Estilo de citación APA 7. No modificar.
 scripts/               dependencies.ps1, build.ps1
@@ -108,7 +108,7 @@ la raíz al compilar; GitHub resuelve desde el archivo.
 
 ## Citas y bibliografía
 
-1. Entrada en `referencias.bib`. La clave es el primer campo.
+1. Entrada en `references.bib`. La clave es el primer campo.
 
 ```bibtex
 @software{macfarlane2026pandoc,
@@ -150,12 +150,12 @@ Las entradas no citadas no se emiten.
 
 ## Carátula
 
-`config/caratula.tex` es un fragmento sin `\documentclass`; se inyecta con
+`config/cover.tex` es un fragmento sin `\documentclass`; se inyecta con
 `--include-before-body`.
 
-Previsualización: abrir `config/preview/caratula-preview.tex` → `Ctrl+Alt+V`.
-Recompila al guardar. El `% !TEX root` de `caratula.tex` apunta ahí, de modo que
-`Ctrl+Alt+B` funciona editando cualquiera de los dos.
+Previsualización: abrir `config/preview/cover-preview.tex` → `Ctrl+Alt+V`. Recompila
+al guardar `cover.tex`. Para poder lanzar el build desde `cover.tex`, añadir en su
+primera línea `% !TEX root = preview/cover-preview.tex`.
 
 `\graphicspath{{docs/images/}{../../docs/images/}}` cubre los dos directorios de
 trabajo: raíz (build) y `config/preview/` (previsualización).

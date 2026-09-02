@@ -45,11 +45,11 @@ $ChaptersByDelivery = @{
 }
 
 $ConfigFiles = @(
-    'config/formato.yaml'
+    'config/format.yaml'
     'config/apa7.tex'
-    'config/caratula.tex'
+    'config/cover.tex'
     'config/apa.csl'
-    'referencias.bib'
+    'references.bib'
 )
 
 function Show-Usage {
@@ -122,12 +122,12 @@ foreach ($file in $Chapters) { Write-Host ('  {0}' -f $file) -ForegroundColor Da
 Write-Host ''
 
 pandoc $Chapters `
-    --metadata-file=config/formato.yaml `
+    --metadata-file=config/format.yaml `
     --include-in-header=config/apa7.tex `
-    --include-before-body=config/caratula.tex `
+    --include-before-body=config/cover.tex `
     --citeproc `
     --csl=config/apa.csl `
-    --bibliography=referencias.bib `
+    --bibliography=references.bib `
     --pdf-engine=xelatex `
     --top-level-division=section `
     --resource-path=".;docs" `
