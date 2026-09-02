@@ -125,6 +125,31 @@ GitHub como en el PDF.
 Cada imagen va en la carpeta de su capítulo. El logo y las fotos del equipo, en la
 raíz de `docs/images/`.
 
+### Contenido distinto en GitHub y en el PDF
+
+El `README.md` necesita las dos cosas: una tabla de contenidos con enlaces para
+navegar los `.md` en GitHub, y el índice real con números de página en el PDF. Se
+resuelve con marcadores en comentarios HTML, que GitHub ignora y Pandoc sí lee.
+
+```markdown
+<!-- pdf:omit-start -->
+Esto se ve en GitHub y no sale en el PDF.
+<!-- pdf:omit-end -->
+
+<!-- pdf:only
+\tableofcontents
+-->
+```
+
+Lo que va dentro de `pdf:only` es LaTeX crudo y se inyecta tal cual en el PDF; al
+estar dentro de un comentario, en GitHub no se ve nada.
+
+Lo procesa `config/pdf-only.lua`, que se pasa a Pandoc con `--lua-filter`.
+
+> **Nota:** la tabla de contenidos con enlaces del README es manual. Si agregas o
+> renombras un encabezado, hay que actualizar también ese enlace. El índice del PDF
+> sí se genera solo.
+
 ### Citas y bibliografía
 
 La lista de referencias se genera sola. No se escribe a mano.
