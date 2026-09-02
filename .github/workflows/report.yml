@@ -1,0 +1,70 @@
+name: Report PDF
+
+on:
+  push:
+    tags:
+      - 'av1*'
+      - 'tb1*'
+      - 'av2*'
+      - 'tb2*'
+  workflow_dispatch:
+    inputs:
+      delivery:
+        description: Entrega a compilar
+        type: choice
+        options: [av1, tb1, av2, tb2]
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determinar la entrega
+        id: delivery
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ inputs.delivery }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${GITHUB_REF_NAME:0:3}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Instalar Pandoc y XeLaTeX
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-xetex \
+            texlive-fonts-recommended \
+            texlive-lang-spanish
+
+      - name: Verificar la fuente TeX Gyre Termes
+        run: |
+          if ! fc-list | grep -qi "TeX Gyre Termes"; then
+            echo "::error::TeX Gyre Termes no esta disponible en el runner"
+            exit 1
+          fi
+
+      - name: Compilar
+        shell: pwsh
+        run: ./scripts/build.ps1 ${{ steps.delivery.outputs.value }}
+
+      - name: Publicar el PDF como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-${{ steps.delivery.outputs.value }}
+          path: dist/*.pdf
+
+      - name: Crear el release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.pdf \
+            --title "Informe ${{ steps.delivery.outputs.value }}" \
+            --notes "PDF generado automaticamente desde el tag $GITHUB_REF_NAME."

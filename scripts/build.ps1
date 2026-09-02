@@ -85,9 +85,17 @@ $Chapters = $ChaptersByDelivery[$Delivery]
 $repo = Split-Path $PSScriptRoot -Parent
 Set-Location $repo
 
-$env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') +
-            ';' +
-            [System.Environment]::GetEnvironmentVariable('Path', 'User')
+$OnWindows = ($null -eq $IsWindows) -or $IsWindows
+
+if ($OnWindows) {
+    $env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') +
+                ';' +
+                [System.Environment]::GetEnvironmentVariable('Path', 'User')
+    $ResourcePath = '.;docs'
+}
+else {
+    $ResourcePath = '.:docs'
+}
 
 foreach ($tool in @('pandoc', 'xelatex')) {
     if ($null -eq (Get-Command $tool -ErrorAction SilentlyContinue)) {
@@ -130,7 +138,7 @@ pandoc $Chapters `
     --bibliography=references.bib `
     --pdf-engine=xelatex `
     --top-level-division=section `
-    --resource-path=".;docs" `
+    "--resource-path=$ResourcePath" `
     --syntax-highlighting=tango `
     -o $output
 
