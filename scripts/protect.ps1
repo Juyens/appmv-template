@@ -9,14 +9,14 @@ $RequiredCheck = 'no-ai-authorship'
 
 function Show-Usage {
     Write-Host ''
-    Write-Host 'Usage:  .\scripts\protect-branches.ps1 <owner/repo>' -ForegroundColor Yellow
+    Write-Host 'Usage:  .\scripts\protect.ps1 <owner/repo>' -ForegroundColor Yellow
     Write-Host ''
     Write-Host '  Applies branch protection to main and develop:'
     Write-Host ('    - the "{0}" status check must pass' -f $RequiredCheck)
     Write-Host '    - no direct pushes, no force pushes, no branch deletion'
     Write-Host '    - the rules apply to admins too'
     Write-Host ''
-    Write-Host '  Example:  .\scripts\protect-branches.ps1 my-org/my-report'
+    Write-Host '  Example:  .\scripts\protect.ps1 my-org/my-report'
     Write-Host ''
     Write-Host '  Branch protection is repository settings, not repository content,'
     Write-Host '  so it is not copied when you create a new repo from this one.'

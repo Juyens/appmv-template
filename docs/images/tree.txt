@@ -15,9 +15,9 @@ appmv/
 │   └── images/             Diagramas y capturas
 │       ├── upc_logo.png    Logo de la carátula
 │       ├── pipeline.svg    Diagrama del flujo de compilación
-│       ├── tree.txt        Fuente de este árbol. Editar aquí.
-│       ├── tree.svg        Generado por scripts/tree.ps1
-│       ├── tree-dark.svg   Generado por scripts/tree.ps1
+│       ├── tree.txt        Fuente de este árbol
+│       ├── tree.svg        El árbol dibujado, tema claro
+│       ├── tree-dark.svg   El árbol dibujado, tema oscuro
 │       └── chapter_1..4/   Una carpeta por capítulo
 │
 ├── config/                 Formato del documento. No se toca al escribir.
@@ -33,9 +33,7 @@ appmv/
 ├── scripts/
 │   ├── dependencies.ps1    Verifica e instala Pandoc, MiKTeX y la fuente
 │   ├── build.ps1           Genera el PDF de la entrega indicada
-│   ├── tree.ps1            Redibuja este árbol como SVG
-│   └── protect-branches.ps1
-│                           Aplica la protección de ramas a un repositorio
+│   └── protect.ps1         Aplica la protección de ramas a un repositorio
 │
 ├── .githooks/              Hook que rechaza commits con autoría de IA
 ├── dist/                   PDF generado. Ignorado por git.
