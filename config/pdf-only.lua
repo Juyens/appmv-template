@@ -26,7 +26,11 @@ function Pandoc(doc)
     elseif raw and raw:match('pdf:only') then
       local body = raw:match('pdf:only%s*(.-)%s*%-%->')
       if body and body ~= '' then
-        table.insert(out, pandoc.RawBlock('latex', body))
+        -- Se interpreta como Markdown, no como LaTeX crudo, para que funcionen
+        -- tanto los comandos (\tableofcontents) como los div (::: {#refs}).
+        for _, parsed in ipairs(pandoc.read(body, 'markdown').blocks) do
+          table.insert(out, parsed)
+        end
       end
     elseif not omit then
       table.insert(out, block)

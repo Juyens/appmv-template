@@ -141,7 +141,8 @@ Esto se ve en GitHub y no sale en el PDF.
 -->
 ```
 
-Lo que va dentro de `pdf:only` es LaTeX crudo y se inyecta tal cual en el PDF; al
+Lo que va dentro de `pdf:only` se interpreta como Markdown, así que admite tanto
+comandos de LaTeX (`\tableofcontents`) como bloques de Pandoc (`::: {#refs}`). Al
 estar dentro de un comentario, en GitHub no se ve nada.
 
 Lo procesa `config/pdf-only.lua`, que se pasa a Pandoc con `--lua-filter`.
@@ -189,8 +190,10 @@ En `docs/closing.md` hay un bloque que parece vacío y que **no se debe borrar**
 ```markdown
 # Bibliografía
 
+<!-- pdf:only
 ::: {#refs}
 :::
+-->
 ```
 
 Marca el punto donde se inserta la lista de referencias. Sin él, Pandoc la pega al

@@ -4,7 +4,9 @@
 
 # Bibliografía
 
+<!-- pdf:only
 ::: {#refs}
 :::
+-->
 
 # Anexos
