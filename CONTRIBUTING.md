@@ -1,78 +1,95 @@
-# Guía del repositorio
+# Guía para contribuir al informe
 
-Informe en Markdown, exportado a PDF con Pandoc + XeLaTeX bajo formato APA 7.
+El informe se escribe en Markdown y posteriormente se exporta a PDF siguiendo el
+formato APA 7. Para automatizar ese proceso se utilizan dos herramientas: Pandoc y
+XeLaTeX.
 
-## Requisitos
+## Dependencias
 
-| Herramienta | Uso | Instalación |
-| --- | --- | --- |
-| Pandoc ≥ 3.10 | Markdown → LaTeX, citas, índice | `winget install JohnMacFarlane.Pandoc` |
-| MiKTeX (XeLaTeX) | LaTeX → PDF | `winget install MiKTeX.MiKTeX` |
-| `tex-gyre` | Fuente TeX Gyre Termes (Times para APA 7) | `mpm --install=tex-gyre` |
+| Herramienta | Uso |
+| --- | --- |
+| Pandoc | Conversión de Markdown a LaTeX (importante para poder seguir el formato APA 7) |
+| MiKTeX (XeLaTeX) | De LaTeX a PDF |
+| `tex-gyre` | Fuente TeX Gyre Termes (Times para APA 7) |
 
-Abrir PowerShell dentro de la carpeta del proyecto clonado desde GitHub y ejecutar
-el siguiente comando para descargar las dependencias:
+Antes de realizar cualquier compilación, es necesario que primero ejecutes
+PowerShell en la raíz de la carpeta del proyecto de GitHub y corras el siguiente
+comando:
 
 ```powershell
 .\scripts\dependencies.ps1
 ```
 
-Verifica los tres, instala solo lo que falte previa confirmación, y activa la
-auto-instalación de paquetes de MiKTeX. Idempotente.
+Ese script verifica si las dependencias están instaladas y, previa confirmación,
+instala las que falten. Si ya está todo, no hace nada.
 
-El PATH no se refresca en ventanas ya abiertas: tras instalar, abrir terminal nueva.
-Si el script viene marcado como descargado: `Unblock-File .\scripts\dependencies.ps1`.
+> **Nota:** después de una instalación hay que abrir una terminal nueva. Windows no
+> refresca el PATH en las ventanas que ya estaban abiertas.
 
-## Build
+## Compilación
 
-Abrir PowerShell dentro de la carpeta del proyecto clonado desde GitHub y ejecutar
-el siguiente comando para generar el PDF:
+Para compilar el proyecto y generar la documentación en PDF, ejecuta el siguiente
+comando en la raíz de la carpeta del proyecto de GitHub:
 
 ```powershell
 .\scripts\build.ps1 <av1|tb1|av2|tb2>
 ```
 
-El argumento es obligatorio; sin él o con un valor fuera del conjunto, sale con
-código 1. Determina el alcance de capítulos y el sufijo del nombre de archivo.
-
-Salida: `dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf`
-
-Invocación subyacente:
+Es necesario agregar el parámetro especificando el tipo de entregable. Determina
+qué capítulos entran en el documento y el nombre del archivo que se genera:
 
 ```
-pandoc $Chapters
-  --metadata-file=config/format.yaml
-  --include-in-header=config/apa7.tex
-  --include-before-body=config/cover.tex
-  --citeproc --csl=config/apa.csl --bibliography=references.bib
-  --pdf-engine=xelatex
-  --top-level-division=section
-  --resource-path=".;docs"
-  -o dist/<nombre>.pdf
+dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf
 ```
 
 ## Estructura
 
 ```
-README.md              Registro de versiones, Collaboration Insights, índice,
-                       Student Outcome, Objetivos SMART
-docs/chapter_1..4.md   Capítulos I–IV
-docs/closing.md        Conclusiones, Glosario, Bibliografía, Anexos
-docs/images/           Assets; una subcarpeta por capítulo
-references.bib         Fuentes en BibTeX
-config/format.yaml     Metadata de pandoc (idioma, papel, fuente, índice)
-config/apa7.tex        Preámbulo LaTeX con las reglas APA 7
-config/cover.tex       Carátula (fragmento, no documento)
-config/preview/        Envoltorio para previsualizar la carátula
-config/apa.csl         Estilo de citación APA 7. No modificar.
-scripts/               dependencies.ps1, build.ps1
+appmv/
+├── README.md               Informe: registro de versiones, collaboration
+│                           insights, índice, student outcome y objetivos SMART
+├── CONTRIBUTING.md         Este archivo
+├── references.bib          Fuentes bibliográficas en formato BibTeX
+├── .gitignore              Excluye el PDF generado y los temporales de LaTeX
+│
+├── docs/                   Contenido del informe
+│   ├── chapter_1.md        Capítulo I: Presentación
+│   ├── chapter_2.md        Capítulo II: Requirements Development and Software
+│   │                       Solution Design
+│   ├── chapter_3.md        Capítulo III: Solution UI/UX Design
+│   ├── chapter_4.md        Capítulo IV: Product Implementation & Validation
+│   ├── closing.md          Conclusiones, glosario, bibliografía y anexos
+│   └── images/             Diagramas y capturas
+│       ├── upc_logo.png    Logo de la carátula
+│       └── chapter_1..4/   Una carpeta por capítulo
+│
+├── config/                 Formato del documento. No se toca al escribir.
+│   ├── format.yaml         Opciones de Pandoc: idioma, papel, fuente, índice
+│   ├── apa7.tex            Reglas APA 7 en LaTeX: márgenes, interlineado,
+│   │                       sangrías, encabezados, numeración de páginas
+│   ├── cover.tex           Carátula según la plantilla del curso
+│   ├── apa.csl             Estilo de citación APA 7. No modificar.
+│   └── preview/            Envoltorio para previsualizar la carátula sin
+│                           compilar el informe completo
+│
+├── scripts/
+│   ├── dependencies.ps1    Verifica e instala Pandoc, MiKTeX y la fuente
+│   └── build.ps1           Genera el PDF de la entrega indicada
+│
+├── dist/                   PDF generado. Ignorado por git.
+└── .vscode/                Extensiones recomendadas y receta de XeLaTeX
 ```
 
 ## Convenciones de escritura
 
+> **Es importante seguir estas convenciones para que la exportación final salga sin
+> problemas.** Varias de ellas no producen ningún error al compilar: el PDF se
+> genera igual, pero con el contenido mal formado.
+
 ### Encabezados
 
-Numeración manual dentro del título; `numbersections: false`.
+La numeración se escribe a mano, dentro del título. LaTeX no numera nada, para que
+lo que salga en el PDF diga exactamente lo que pide el enunciado.
 
 ```markdown
 # Capítulo I: Presentación
@@ -81,15 +98,13 @@ Numeración manual dentro del título; `numbersections: false`.
 #### 1.1.1.1. Subnivel
 ```
 
-`#` fuerza salto de página (`\section` redefinido en `apa7.tex`).
-Índice a 3 niveles; los inferiores se renderizan pero no se listan.
-Salto manual: `\newpage` en línea propia.
+Cada `#` de primer nivel empieza en página nueva automáticamente. El índice muestra
+tres niveles; los más profundos se renderizan pero no se listan. Para forzar un
+salto de página, `\newpage` en una línea propia.
 
 ### Tablas
 
-Solo tablas de tuberías. El writer LaTeX de pandoc **descarta el marcado HTML y
-conserva el texto**: una `<table>` se renderiza como párrafos sueltos, sin error.
-Igual con `<div align="center">`.
+Solo tablas de tuberías. **Nunca `<table>` de HTML.**
 
 ```markdown
 | Versión | Fecha      | Autor |
@@ -97,46 +112,57 @@ Igual con `<div align="center">`.
 | AV1     | 02/04/2026 | Todos |
 ```
 
+Al exportar, Pandoc descarta el marcado HTML y conserva únicamente el texto: una
+tabla en HTML se convierte en párrafos sueltos, sin estructura y sin ningún mensaje
+de error. Lo mismo ocurre con `<div align="center">`, que pierde el centrado.
+
 ### Imágenes
 
-Ruta relativa al `.md` que la referencia. `--resource-path=".;docs"` resuelve desde
-la raíz al compilar; GitHub resuelve desde el archivo.
+La ruta se escribe relativa al archivo `.md` que la referencia. Así se ve tanto en
+GitHub como en el PDF.
 
 ```markdown
 ![Context map del dominio](images/chapter_2/context-map.png){width=85%}
 ```
 
-## Citas y bibliografía
+Cada imagen va en la carpeta de su capítulo. El logo y las fotos del equipo, en la
+raíz de `docs/images/`.
 
-1. Entrada en `references.bib`. La clave es el primer campo.
+### Citas y bibliografía
+
+La lista de referencias se genera sola. No se escribe a mano.
+
+**1.** Agregar la fuente a `references.bib`. En Google Scholar: botón de comillas →
+BibTeX. La primera palabra de la entrada es la clave con la que se cita.
 
 ```bibtex
-@software{macfarlane2026pandoc,
-  author  = {MacFarlane, John},
-  title   = {Pandoc: A universal document converter},
-  version = {3.10},
-  year    = {2026},
-  url     = {https://pandoc.org}
+@book{evans2003ddd,
+  author    = {Evans, Eric},
+  title     = {Domain-Driven Design},
+  publisher = {Addison-Wesley},
+  year      = {2003}
 }
 ```
 
-| Tipo | Uso |
-| --- | --- |
-| `@book` | Libros |
-| `@article` | Artículos de revista |
-| `@software` | Herramientas. APA añade `[Computer software]` y la versión |
-| `@misc` | Documentación web, estándares |
+Para herramientas de software se usa `@software` en lugar de `@book`: APA añade solo
+la etiqueta `[Computer software]` y el número de versión.
 
-2. Citar en el texto:
+**2.** Citarla en el texto.
 
-| Sintaxis | Salida |
+| Sintaxis | Resultado |
 | --- | --- |
 | `[@evans2003ddd]` | (Evans, 2003) |
-| `[-@evans2003ddd]` | (2003) — para citas narrativas |
+| `[-@evans2003ddd]` | (2003), para citas narrativas |
 | `[@evans2003ddd, p. 45]` | (Evans, 2003, p. 45) |
-| `[@a; @b]` | (Autor A, 2020; Autor B, 2021) |
+| `[@clave1; @clave2]` | (Autor A, 2020; Autor B, 2021) |
 
-3. Punto de inserción de la lista, en `docs/closing.md`:
+**3.** Nada más. La entrada aparece en la bibliografía, ordenada alfabéticamente y
+con sangría francesa.
+
+Una fuente que no se cite en el texto no aparece en la bibliografía, y así debe ser:
+APA solo lista lo que se cita.
+
+En `docs/closing.md` hay un bloque que parece vacío y que **no se debe borrar**:
 
 ```markdown
 # Bibliografía
@@ -145,49 +171,14 @@ la raíz al compilar; GitHub resuelve desde el archivo.
 :::
 ```
 
-Sin ese div, citeproc anexa la lista al final del documento, después de Anexos.
-Las entradas no citadas no se emiten.
+Marca el punto donde se inserta la lista de referencias. Sin él, Pandoc la pega al
+final de todo el documento, es decir después de los anexos.
 
-## Carátula
+### Carátula
 
-`config/cover.tex` es un fragmento sin `\documentclass`; se inyecta con
-`--include-before-body`.
+`config/cover.tex` es un fragmento de LaTeX, no un documento, así que no compila por
+sí solo. Para verlo, abrir `config/preview/cover-preview.tex` y pulsar `Ctrl+Alt+V`;
+se recompila cada vez que se guarda.
 
-Previsualización: abrir `config/preview/cover-preview.tex` → `Ctrl+Alt+V`. Recompila
-al guardar `cover.tex`. Para poder lanzar el build desde `cover.tex`, añadir en su
-primera línea `% !TEX root = preview/cover-preview.tex`.
-
-`\graphicspath{{docs/images/}{../../docs/images/}}` cubre los dos directorios de
-trabajo: raíz (build) y `config/preview/` (previsualización).
-
-Campos a editar: NRC, docente, equipo, proyecto, tabla de integrantes (orden
-alfabético por apellido) y mes.
-
-## Formato APA 7
-
-Implementado en `config/apa7.tex`:
-
-| Requisito | Mecanismo |
-| --- | --- |
-| Márgenes 1" | `geometry` |
-| Interlineado 1.5 | `\onehalfspacing` |
-| Sangría 0.5" primera línea | `\parindent` |
-| Alineado a la izquierda con sangría | `ragged2e` + `\RaggedRightParindent` |
-| Sin viudas ni huérfanas | `\widowpenalty` / `\clubpenalty` = 10000 |
-| Número de página arriba a la derecha | `fancyhdr` |
-| 5 niveles de encabezado | `titlesec` |
-| Sangría francesa en referencias | `\cslhangindent` = 0.5in |
-| Rótulo "Tabla" / "Figura" | `\renewcommand` sobre babel |
-
-## Diagnóstico
-
-| Mensaje | Causa | Acción |
-| --- | --- | --- |
-| `ERROR: no delivery given` | Falta el argumento | `build.ps1 av1` |
-| `ERROR: xelatex is not installed` | MiKTeX ausente o PATH sin refrescar | `dependencies.ps1`, terminal nueva |
-| `ERROR: these files are missing` | Falta un `$ConfigFiles` o capítulo | Crear el archivo listado |
-| `Undefined control sequence` | Comando LaTeX inexistente | Ver línea indicada; suele faltar un `\usepackage` en `apa7.tex` |
-| `The font ... cannot be found` | Falta `tex-gyre` | `mpm --install=tex-gyre` |
-| `Cleaning failed: ... 'perl'` | LaTeX Workshop limpiando con latexmk | Ya resuelto: `clean.method: glob` en `.vscode/settings.json` |
-| Tabla renderizada como párrafos | Tabla en HTML | Convertir a tuberías |
-| `not checked for MiKTeX updates` | Aviso, no error | Consola de MiKTeX → Updates |
+Solo se editan los datos: NRC, docente, equipo, proyecto, la tabla de integrantes
+—en orden alfabético por apellido, como exige el enunciado— y el mes.
