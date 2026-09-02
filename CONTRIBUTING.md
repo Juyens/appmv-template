@@ -131,6 +131,20 @@ Cada `#` de primer nivel empieza en página nueva automáticamente. El índice m
 tres niveles; los más profundos se renderizan pero no se listan. Para forzar un
 salto de página, `\newpage` en una línea propia.
 
+### Separadores y emojis
+
+Para una línea separadora, usa `***` y déjala con una línea en blanco antes y
+después. **No uses `---`**: en Markdown esa secuencia también significa "cabecera de
+tabla" y "bloque de metadatos", y según lo que tenga alrededor el separador acaba
+convirtiendo tu texto en una tabla o haciéndolo desaparecer del PDF.
+
+El build ya desactiva la interpretación como metadatos (`--from=markdown-yaml_metadata_block`),
+que es la que borraba contenido en silencio, pero la ambigüedad con las tablas sigue.
+
+Los **emojis no se imprimen**. TeX Gyre Termes es una fuente de texto y no tiene
+glifos para ✕, ⊘ o 🔗: en GitHub se ven y en el PDF desaparecen sin dejar hueco ni
+mensaje de error. Si necesitas marcar estados en una tabla, usa palabras.
+
 ### Tablas
 
 Solo tablas de tuberías. **Nunca `<table>` de HTML.**
