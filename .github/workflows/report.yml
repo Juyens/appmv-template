@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       delivery:
-        description: Entrega a compilar
+        description: Delivery to build
         type: choice
         options: [av1, tb1, av2, tb2]
         required: true
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Determinar la entrega
+      - name: Resolve the delivery
         id: delivery
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -37,7 +37,7 @@ jobs:
             echo "value=${GITHUB_REF_NAME:0:3}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Instalar Pandoc
+      - name: Install Pandoc
         run: |
           curl -fsSL -o pandoc.deb \
             "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
@@ -45,7 +45,7 @@ jobs:
           rm pandoc.deb
           pandoc --version | head -1
 
-      - name: Instalar XeLaTeX
+      - name: Install XeLaTeX
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
@@ -57,28 +57,28 @@ jobs:
             lmodern \
             fonts-texgyre
 
-      - name: Verificar la fuente TeX Gyre Termes
+      - name: Check the TeX Gyre Termes font
         run: |
           echo "--- fontconfig ---"
-          fc-list | grep -i "gyre" || echo "(sin coincidencias)"
+          fc-list | grep -i "gyre" || echo "(no matches)"
           echo "--- texmf ---"
-          kpsewhich texgyretermes-regular.otf || echo "(no esta en el arbol texmf)"
+          kpsewhich texgyretermes-regular.otf || echo "(not in the texmf tree)"
           if ! fc-list | grep -qi "TeX Gyre Termes"; then
-            echo "::error::TeX Gyre Termes no esta disponible en el runner"
+            echo "::error::TeX Gyre Termes is not available on the runner"
             exit 1
           fi
 
-      - name: Compilar
+      - name: Build
         shell: pwsh
         run: ./scripts/build.ps1 ${{ steps.delivery.outputs.value }}
 
-      - name: Publicar el PDF como artifact
+      - name: Upload the PDF as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: report-${{ steps.delivery.outputs.value }}
           path: dist/*.pdf
 
-      - name: Crear el release
+      - name: Create the release
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
