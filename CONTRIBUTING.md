@@ -94,6 +94,21 @@ Si un commit ya quedó con esa línea y todavía no lo subiste:
 git commit --amend
 ```
 
+### Protección de ramas
+
+`main` y `develop` rechazan los pushes directos: todo entra por Pull Request y con
+el check `no-ai-authorship` en verde. Aplica también a los administradores.
+
+Esa configuración vive en los ajustes del repositorio, no en sus archivos, así que
+**no se copia al crear un repositorio nuevo a partir de este**. Para replicarla:
+
+```powershell
+.\scripts\protect-branches.ps1 <owner/repo>
+```
+
+Requiere que las dos ramas existan en el remoto y que el workflow haya corrido al
+menos una vez, para que GitHub conozca el check.
+
 ## Convenciones de escritura
 
 > **Es importante seguir estas convenciones para que la exportación final salga sin
