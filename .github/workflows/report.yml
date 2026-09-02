@@ -41,10 +41,15 @@ jobs:
             pandoc \
             texlive-xetex \
             texlive-fonts-recommended \
-            texlive-lang-spanish
+            texlive-lang-spanish \
+            fonts-texgyre
 
       - name: Verificar la fuente TeX Gyre Termes
         run: |
+          echo "--- fontconfig ---"
+          fc-list | grep -i "gyre" || echo "(sin coincidencias)"
+          echo "--- texmf ---"
+          kpsewhich texgyretermes-regular.otf || echo "(no esta en el arbol texmf)"
           if ! fc-list | grep -qi "TeX Gyre Termes"; then
             echo "::error::TeX Gyre Termes no esta disponible en el runner"
             exit 1
