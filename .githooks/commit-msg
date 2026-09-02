@@ -1,0 +1,24 @@
+#!/bin/sh
+# Rechaza commits que atribuyan autoria a herramientas de IA.
+# Se activa con:  git config core.hooksPath .githooks
+# Lo hace dependencies.ps1 automaticamente.
+
+mensaje="$1"
+
+patron='^[[:space:]]*Co-authored-by:.*(claude|copilot|chatgpt|openai|anthropic|gemini|cursor|codeium|devin|tabnine)'
+firma='(Generated with|Co-Authored-By).*(Claude|Copilot|ChatGPT|Gemini|Cursor)'
+
+if grep -qiE "$patron" "$mensaje" || grep -qE "$firma" "$mensaje" || grep -q '🤖' "$mensaje"; then
+  echo ""
+  echo "COMMIT RECHAZADO: el mensaje atribuye autoria a una herramienta de IA."
+  echo ""
+  echo "Lineas encontradas:"
+  grep -inE "$patron|$firma|🤖" "$mensaje" | sed 's/^/  /'
+  echo ""
+  echo "El trabajo de este curso se evalua de forma individual y el historial"
+  echo "de commits es parte de la evidencia. Quita esas lineas del mensaje."
+  echo ""
+  exit 1
+fi
+
+exit 0

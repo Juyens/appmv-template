@@ -47,6 +47,20 @@ function Test-LatexFile {
 }
 
 Write-Host ''
+Write-Host 'Configuring git hooks...' -ForegroundColor Cyan
+
+$repo = Split-Path $PSScriptRoot -Parent
+if (Test-Path (Join-Path $repo '.githooks')) {
+    Push-Location $repo
+    git config core.hooksPath .githooks
+    Pop-Location
+    Write-Host '  core.hooksPath -> .githooks' -ForegroundColor Green
+}
+else {
+    Write-Host '  .githooks not found, skipped' -ForegroundColor Yellow
+}
+
+Write-Host ''
 Write-Host 'Checking build dependencies...' -ForegroundColor Cyan
 Write-Host ''
 

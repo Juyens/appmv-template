@@ -77,6 +77,23 @@ appmv/
 └── .vscode/                Extensiones recomendadas y receta de XeLaTeX
 ```
 
+## Commits
+
+El historial es parte de la evidencia que se evalúa, así que **ningún commit debe
+atribuir autoría a una herramienta de IA**. Hay dos controles:
+
+- `.githooks/commit-msg` rechaza el commit en tu máquina si el mensaje contiene
+  `Co-authored-by:` con Claude, Copilot, ChatGPT y similares. Lo activa
+  `dependencies.ps1` con `git config core.hooksPath .githooks`.
+- El workflow `commit-policy.yml` revisa los mensajes en cada push y cada Pull
+  Request, por si alguien usó `--no-verify` o no configuró el hook.
+
+Si un commit ya quedó con esa línea y todavía no lo subiste:
+
+```powershell
+git commit --amend
+```
+
 ## Convenciones de escritura
 
 > **Es importante seguir estas convenciones para que la exportación final salga sin
