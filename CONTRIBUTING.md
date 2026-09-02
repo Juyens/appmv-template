@@ -64,7 +64,7 @@ appmv/
 │
 ├── config/                 Formato del documento. No se toca al escribir.
 │   ├── format.yaml         Opciones de Pandoc: idioma, papel, fuente, índice
-│   ├── apa7.tex            Reglas APA 7 en LaTeX: márgenes, interlineado, sangrías, encabezados, numeración de páginas
+│   ├── apa7.tex            Reglas APA 7 en LaTeX
 │   ├── cover.tex           Carátula según la plantilla del curso
 │   ├── apa.csl             Estilo de citación APA 7. No modificar.
 │   └── preview/            Envoltorio para previsualizar la carátula sin compilar el informe completo
