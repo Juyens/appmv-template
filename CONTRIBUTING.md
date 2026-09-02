@@ -52,9 +52,17 @@ appmv/
 ├── references.bib          Fuentes bibliográficas en formato BibTeX
 ├── .gitignore              Excluye el PDF generado y los temporales de LaTeX
 │
-├── docs/                   Contenido del informe
-│   ├── chapter_1.md        Capítulo I: Presentación
-│   ├── chapter_2.md        Capítulo II: Requirements Development and Software Solution Design
+├── docs/                   Contenido del informe. Un archivo por sección, para
+│   │                       que varias personas escriban a la vez sin conflictos.
+│   ├── 1-1-startup-profile.md
+│   ├── 1-2-solution-profile.md
+│   ├── 1-3-target-segments.md
+│   ├── 2-1-competitors.md
+│   ├── 2-2-interviews.md
+│   ├── 2-3-needfinding.md
+│   ├── 2-4-requirements-specification.md
+│   ├── 2-5-strategic-level-ddd.md
+│   ├── 2-6-tactical-level-ddd.md
 │   ├── chapter_3.md        Capítulo III: Solution UI/UX Design
 │   ├── chapter_4.md        Capítulo IV: Product Implementation & Validation
 │   ├── closing.md          Conclusiones, glosario, bibliografía y anexos
