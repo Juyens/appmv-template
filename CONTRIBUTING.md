@@ -50,49 +50,7 @@ dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf
 
 ## Estructura
 
-<details>
-<summary><b>Árbol del proyecto</b></summary>
-
-```
-appmv/
-├── README.md               Informe: registro de versiones, collaboration
-│                           insights, índice, student outcome y objetivos SMART
-├── CONTRIBUTING.md         Este archivo
-├── references.bib          Fuentes bibliográficas en formato BibTeX
-├── .gitignore              Excluye el PDF generado y los temporales de LaTeX
-│
-├── docs/                   Contenido del informe
-│   ├── chapter_1.md        Capítulo I: Presentación
-│   ├── chapter_2.md        Capítulo II: Requirements Development and Software
-│   │                       Solution Design
-│   ├── chapter_3.md        Capítulo III: Solution UI/UX Design
-│   ├── chapter_4.md        Capítulo IV: Product Implementation & Validation
-│   ├── closing.md          Conclusiones, glosario, bibliografía y anexos
-│   └── images/             Diagramas y capturas
-│       ├── upc_logo.png    Logo de la carátula
-│       └── chapter_1..4/   Una carpeta por capítulo
-│
-├── config/                 Formato del documento. No se toca al escribir.
-│   ├── format.yaml         Opciones de Pandoc: idioma, papel, fuente, índice
-│   ├── apa7.tex            Reglas APA 7 en LaTeX
-│   ├── cover.tex           Carátula según la plantilla del curso
-│   ├── apa.csl             Estilo de citación APA 7. No modificar.
-│   ├── pdf-only.lua        Filtro que separa lo que se ve en GitHub de lo que
-│   │                       entra al PDF
-│   └── preview/            Envoltorio para previsualizar la carátula sin
-│                           compilar el informe completo
-│
-├── scripts/
-│   ├── dependencies.ps1    Verifica e instala Pandoc, MiKTeX y la fuente
-│   ├── build.ps1           Genera el PDF de la entrega indicada
-│   └── protect-branches.ps1  Aplica la protección de ramas a un repositorio
-│
-├── .githooks/              Hook que rechaza commits con autoría de IA
-├── dist/                   PDF generado. Ignorado por git.
-└── .vscode/                Extensiones recomendadas y receta de XeLaTeX
-```
-
-</details>
+![Árbol del proyecto](docs/images/tree.svg)
 
 ## Commits
 
