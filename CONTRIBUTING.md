@@ -56,8 +56,8 @@ dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf
 </picture>
 
 > [!NOTE]
-> El árbol se edita en `docs/images/tree.txt` y se redibuja con
-> `.\scripts\tree.ps1`, que genera las dos versiones de color.
+> La versión en texto del árbol, copiable y buscable, está en
+> `docs/images/tree.txt`.
 
 ## Commits
 
@@ -83,7 +83,7 @@ el check `no-ai-authorship` en verde, incluidos los administradores.
 > no se copia al crear un repositorio nuevo a partir de este. Para replicarla:
 >
 > ```powershell
-> .\scripts\protect-branches.ps1 <owner/repo>
+> .\scripts\protect.ps1 <owner/repo>
 > ```
 >
 > Las dos ramas tienen que existir en el remoto y el workflow tiene que haber
