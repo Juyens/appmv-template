@@ -18,6 +18,9 @@ on:
 permissions:
   contents: write
 
+env:
+  PANDOC_VERSION: '3.10'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,11 +37,18 @@ jobs:
             echo "value=${GITHUB_REF_NAME:0:3}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Instalar Pandoc y XeLaTeX
+      - name: Instalar Pandoc
+        run: |
+          curl -fsSL -o pandoc.deb \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i pandoc.deb
+          rm pandoc.deb
+          pandoc --version | head -1
+
+      - name: Instalar XeLaTeX
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
-            pandoc \
             texlive-xetex \
             texlive-fonts-recommended \
             texlive-lang-spanish \
