@@ -55,10 +55,6 @@ dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf
   <img alt="Árbol del proyecto" src="docs/images/tree.svg">
 </picture>
 
-> [!NOTE]
-> La versión en texto del árbol, copiable y buscable, está en
-> `docs/images/tree.txt`.
-
 ## Flujo de trabajo
 
 | Rama | Para qué sirve |

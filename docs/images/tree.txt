@@ -1,47 +1,42 @@
-appmv/
-├── README.md               Informe: registro de versiones, collaboration
-│                           insights, índice, student outcome y objetivos SMART
-├── CONTRIBUTING.md         Este archivo
-├── references.bib          Fuentes bibliográficas en formato BibTeX
-├── .gitignore              Excluye el PDF generado y los temporales de LaTeX
-├── .gitattributes          Fija los finales de linea para todo el equipo
+repo/
+├── README.md
+├── CONTRIBUTING.md
+├── references.bib
+├── .gitignore
+├── .gitattributes
 │
-├── docs/                   Contenido del informe
-│   ├── chapter_1.md        Capítulo I: Presentación
-│   ├── chapter_2.md        Capítulo II: Requirements Development and Software
-│   │                       Solution Design
-│   ├── chapter_3.md        Capítulo III: Solution UI/UX Design
-│   ├── chapter_4.md        Capítulo IV: Product Implementation & Validation
-│   ├── closing.md          Conclusiones, glosario, bibliografía y anexos
-│   └── images/             Diagramas y capturas
-│       ├── upc_logo.png    Logo de la carátula
-│       ├── pipeline.svg    Diagrama del flujo de compilación
-│       ├── tree.txt        Fuente de este árbol
-│       ├── tree.svg        El árbol dibujado, tema claro
-│       ├── tree-dark.svg   El árbol dibujado, tema oscuro
-│       └── chapter_1..4/   Una carpeta por capítulo
+├── docs/
+│   ├── chapter_1.md
+│   ├── chapter_2.md
+│   ├── chapter_3.md
+│   ├── chapter_4.md
+│   ├── closing.md
+│   └── images/
+│       ├── upc_logo.png
+│       ├── pipeline.svg
+│       ├── tree.txt
+│       ├── tree.svg
+│       ├── tree-dark.svg
+│       └── chapter_1..4/
 │
-├── config/                 Formato del documento. No se toca al escribir.
-│   ├── format.yaml         Opciones de Pandoc: idioma, papel, fuente, índice
-│   ├── apa7.tex            Reglas APA 7 en LaTeX
-│   ├── cover.tex           Carátula según la plantilla del curso
-│   ├── apa.csl             Estilo de citación APA 7. No modificar.
-│   ├── pdf-only.lua        Filtro que separa lo que se ve en GitHub de lo que
-│   │                       entra al PDF
-│   └── preview/            Envoltorio para previsualizar la carátula sin
-│                           compilar el informe completo
+├── config/
+│   ├── format.yaml
+│   ├── apa7.tex
+│   ├── cover.tex
+│   ├── apa.csl
+│   ├── pdf-only.lua
+│   └── preview/
 │
 ├── scripts/
-│   ├── dependencies.ps1    Verifica e instala Pandoc, MiKTeX y la fuente
-│   ├── build.ps1           Genera el PDF de la entrega indicada
-│   └── protect.ps1         Aplica la protección de ramas a un repositorio
+│   ├── dependencies.ps1
+│   ├── build.ps1
+│   └── protect.ps1
 │
 ├── .github/
 │   └── workflows/
-│       ├── report.yml      Compila el PDF y publica el release con un tag
+│       ├── report.yml
 │       └── commit-policy.yml
-│                           Revisa que ningún commit atribuya autoría a una IA
 │
-├── .githooks/              Hook que rechaza commits con autoría de IA
-├── dist/                   PDF generado. Ignorado por git.
-└── .vscode/                Extensiones recomendadas y receta de XeLaTeX
+├── .githooks/
+├── dist/
+└── .vscode/
