@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 655 929" width="655" height="929">
   <rect width="655" height="929" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
-  <text xml:space="preserve" x="18" y="32.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13"><tspan fill="#0969da">appmv/</tspan></text>
+  <text xml:space="preserve" x="18" y="32.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13"><tspan fill="#0969da">repo/</tspan></text>
   <text xml:space="preserve" x="18" y="51.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13"><tspan fill="#afb8c1">├── </tspan><tspan fill="#1f2328">README.md</tspan><tspan fill="#6e7781">               Informe: registro de versiones, collaboration</tspan></text>
   <text xml:space="preserve" x="18" y="70.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13"><tspan fill="#afb8c1">│                           </tspan><tspan fill="#6e7781">insights, índice, student outcome y objetivos SMART</tspan></text>
   <text xml:space="preserve" x="18" y="89.2" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13"><tspan fill="#afb8c1">├── </tspan><tspan fill="#1f2328">CONTRIBUTING.md</tspan><tspan fill="#6e7781">         Este archivo</tspan></text>

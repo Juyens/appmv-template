@@ -1,4 +1,4 @@
-appmv/
+repo/
 ├── README.md               Informe: registro de versiones, collaboration
 │                           insights, índice, student outcome y objetivos SMART
 ├── CONTRIBUTING.md         Este archivo
