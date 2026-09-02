@@ -54,7 +54,7 @@ appmv/
 │
 ├── docs/                   Contenido del informe
 │   ├── chapter_1.md        Capítulo I: Presentación
-│   ├── chapter_2.md        Capítulo II: Requirements Development and Software Solution Design                
+│   ├── chapter_2.md        Capítulo II: Requirements Development and Software Solution Design
 │   ├── chapter_3.md        Capítulo III: Solution UI/UX Design
 │   ├── chapter_4.md        Capítulo IV: Product Implementation & Validation
 │   ├── closing.md          Conclusiones, glosario, bibliografía y anexos
