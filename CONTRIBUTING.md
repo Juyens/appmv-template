@@ -54,8 +54,7 @@ appmv/
 │
 ├── docs/                   Contenido del informe
 │   ├── chapter_1.md        Capítulo I: Presentación
-│   ├── chapter_2.md        Capítulo II: Requirements Development and Software
-│   │                       Solution Design
+│   ├── chapter_2.md        Capítulo II: Requirements Development and Software Solution Design                
 │   ├── chapter_3.md        Capítulo III: Solution UI/UX Design
 │   ├── chapter_4.md        Capítulo IV: Product Implementation & Validation
 │   ├── closing.md          Conclusiones, glosario, bibliografía y anexos
@@ -65,12 +64,10 @@ appmv/
 │
 ├── config/                 Formato del documento. No se toca al escribir.
 │   ├── format.yaml         Opciones de Pandoc: idioma, papel, fuente, índice
-│   ├── apa7.tex            Reglas APA 7 en LaTeX: márgenes, interlineado,
-│   │                       sangrías, encabezados, numeración de páginas
+│   ├── apa7.tex            Reglas APA 7 en LaTeX: márgenes, interlineado, sangrías, encabezados, numeración de páginas
 │   ├── cover.tex           Carátula según la plantilla del curso
 │   ├── apa.csl             Estilo de citación APA 7. No modificar.
-│   └── preview/            Envoltorio para previsualizar la carátula sin
-│                           compilar el informe completo
+│   └── preview/            Envoltorio para previsualizar la carátula sin compilar el informe completo
 │
 ├── scripts/
 │   ├── dependencies.ps1    Verifica e instala Pandoc, MiKTeX y la fuente
