@@ -4,6 +4,7 @@ appmv/
 ├── CONTRIBUTING.md         Este archivo
 ├── references.bib          Fuentes bibliográficas en formato BibTeX
 ├── .gitignore              Excluye el PDF generado y los temporales de LaTeX
+├── .gitattributes          Fija los finales de linea para todo el equipo
 │
 ├── docs/                   Contenido del informe
 │   ├── chapter_1.md        Capítulo I: Presentación
@@ -34,6 +35,12 @@ appmv/
 │   ├── dependencies.ps1    Verifica e instala Pandoc, MiKTeX y la fuente
 │   ├── build.ps1           Genera el PDF de la entrega indicada
 │   └── protect.ps1         Aplica la protección de ramas a un repositorio
+│
+├── .github/
+│   └── workflows/
+│       ├── report.yml      Compila el PDF y publica el release con un tag
+│       └── commit-policy.yml
+│                           Revisa que ningún commit atribuya autoría a una IA
 │
 ├── .githooks/              Hook que rechaza commits con autoría de IA
 ├── dist/                   PDF generado. Ignorado por git.
