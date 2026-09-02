@@ -5,6 +5,7 @@ on:
   pull_request:
 
 jobs:
+  # Do not rename this job: it is the required status check on main and develop.
   no-ai-authorship:
     runs-on: ubuntu-latest
 
@@ -13,26 +14,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Revisar los mensajes de commit
+      - name: Scan commit messages
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            rango="origin/${{ github.base_ref }}..HEAD"
+            range="origin/${{ github.base_ref }}..HEAD"
           elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-            rango="HEAD"
+            range="HEAD"
           else
-            rango="${{ github.event.before }}..${{ github.sha }}"
+            range="${{ github.event.before }}..${{ github.sha }}"
           fi
 
-          echo "Revisando: $rango"
+          echo "Scanning: $range"
 
-          patron='Co-authored-by:.*(claude|copilot|chatgpt|openai|anthropic|gemini|cursor|codeium|devin|tabnine)|Generated with.*(Claude|Copilot|ChatGPT)'
+          pattern='Co-authored-by:.*(claude|copilot|chatgpt|openai|anthropic|gemini|cursor|codeium|devin|tabnine)|Generated with.*(Claude|Copilot|ChatGPT)'
 
-          encontrados=$(git log --format='%H%n%B%n---' "$rango" | grep -iE "$patron" || true)
+          found=$(git log --format='%H%n%B%n---' "$range" | grep -iE "$pattern" || true)
 
-          if [ -n "$encontrados" ]; then
-            echo "::error::Hay commits que atribuyen autoria a herramientas de IA"
-            echo "$encontrados"
+          if [ -n "$found" ]; then
+            echo "::error::Some commits credit an AI tool as an author"
+            echo "$found"
             exit 1
           fi
 
-          echo "Sin atribuciones a herramientas de IA."
+          echo "No AI authorship found."

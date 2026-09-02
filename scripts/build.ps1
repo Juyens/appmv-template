@@ -130,6 +130,7 @@ foreach ($file in $Chapters) { Write-Host ('  {0}' -f $file) -ForegroundColor Da
 Write-Host ''
 
 pandoc $Chapters `
+    --from=markdown-yaml_metadata_block `
     --metadata-file=config/format.yaml `
     --include-in-header=config/apa7.tex `
     --include-before-body=config/cover.tex `
