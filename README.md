@@ -1,5 +1,9 @@
 # Registro de Versiones del Informe
 
+| Versión |    Fecha   |      Autor     | Descripción de modificación |
+|:-------:|:----------:|:--------------:|:---------------------------:|
+|   AV1   | 02/09/2026 | Todo el equipo |       Primera version       |
+
 # Project Report Collaboration Insights
 
 <!-- pdf:omit-start -->
@@ -76,5 +80,10 @@
 -->
 
 # Student Outcome
+
+| Criterio específico                                                                                                                     | Acciones realizadas | Conclusiones |
+|-----------------------------------------------------------------------------------------------------------------------------------------|---------------------|--------------|
+| Actualiza conceptos y conocimientos necesarios para su desarrollo profesional y en especial para su proyecto en soluciones de software. |                     |              |
+| Reconoce la necesidad del aprendizaje permanente para el desempeño profesional y el desarrollo de proyectos en soluciones de software.  |                     |              |
 
 # Objetivos SMART
