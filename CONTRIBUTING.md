@@ -203,6 +203,18 @@ Solo tablas de tuberías.
 > sin ningún mensaje de error. A `<div align="center">` le pasa lo mismo con el
 > centrado.
 
+Para celdas con varios bloques, como las del Student Outcome, se usa `<br>` dentro
+de la celda. GitHub lo muestra como salto de línea y el filtro lo convierte en un
+salto real al exportar, así que el contenido no queda pegado.
+
+```markdown
+| Criterio | Acciones realizadas |
+| --- | --- |
+| Comunica oralmente | **Apellido, Nombre**<br>*AV1:* Lo que hizo.<br>*TB1:* Lo que hizo.<br><br>**Otro Apellido, Nombre**<br>*AV1:* Lo que hizo. |
+```
+
+Es la única etiqueta HTML que sobrevive, y solo porque el filtro la traduce.
+
 ### Imágenes
 
 La ruta se escribe relativa al archivo `.md` que la referencia, y así funciona tanto

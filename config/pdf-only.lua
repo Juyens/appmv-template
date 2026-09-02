@@ -9,6 +9,15 @@
 --        No se ve en GitHub (es un comentario HTML), se inyecta como LaTeX
 --        en el PDF.
 
+-- Los <br> dentro de una celda de tabla se pierden al pasar a LaTeX, y el
+-- contenido de la celda queda todo pegado. Convertirlos en saltos de linea de
+-- verdad deja que pandoc elija como representarlos en cada contexto.
+function RawInline(el)
+  if el.format == 'html' and el.text:match('^<br%s*/?>$') then
+    return pandoc.LineBreak()
+  end
+end
+
 function Pandoc(doc)
   local out = {}
   local omit = false
