@@ -29,7 +29,7 @@ compilar por primera vez:
 Comprueba las tres, instala las que falten previa confirmación y no hace nada si ya
 están. Puedes correrlo las veces que quieras.
 
-> **Nota**
+> [!NOTE]
 > Después de una instalación hay que abrir una terminal nueva. Windows no refresca
 > el PATH en las ventanas que ya estaban abiertas.
 
@@ -113,7 +113,7 @@ no lo subiste, `git commit --amend` lo arregla.
 `main` y `develop` rechazan los pushes directos. Todo entra por Pull Request y con
 el check `no-ai-authorship` en verde, incluidos los administradores.
 
-> **Atención**
+> [!WARNING]
 > Esa configuración vive en los ajustes del repositorio, no en sus archivos, así que
 > no se copia al crear un repositorio nuevo a partir de este. Para replicarla:
 >
@@ -126,7 +126,7 @@ el check `no-ai-authorship` en verde, incluidos los administradores.
 
 ## Convenciones de escritura
 
-> **Importante**
+> [!IMPORTANT]
 > Varias de estas reglas no producen ningún error al compilar. El PDF se genera
 > igual, pero con el contenido mal formado, y te enteras al abrirlo.
 
@@ -150,7 +150,7 @@ los más profundos salen en el documento pero no se listan. Para forzar un salto
 
 Usa `***` para una línea separadora, con una línea en blanco antes y después.
 
-> **Cuidado**
+> [!CAUTION]
 > No uses `---`. Esa secuencia también significa "cabecera de tabla" y "bloque de
 > metadatos" en Markdown, y según lo que tenga alrededor convierte tu texto en una
 > tabla o lo hace desaparecer del PDF sin avisar.
@@ -173,7 +173,7 @@ Solo tablas de tuberías.
 | AV1     | 02/04/2026 | Todos |
 ```
 
-> **Cuidado**
+> [!CAUTION]
 > Nunca uses `<table>` de HTML. Al exportar, Pandoc descarta el marcado y conserva
 > solo el texto, así que la tabla se convierte en párrafos sueltos, sin estructura y
 > sin ningún mensaje de error. A `<div align="center">` le pasa lo mismo con el
@@ -214,7 +214,7 @@ de un comentario, en GitHub no se ve nada.
 
 De eso se encarga `config/pdf-only.lua`, que el build pasa con `--lua-filter`.
 
-> **Nota**
+> [!NOTE]
 > La tabla de contenidos con enlaces del README se mantiene a mano. Si agregas o
 > renombras un encabezado, actualiza también el enlace. El índice del PDF sí se
 > genera solo.
@@ -253,7 +253,7 @@ con sangría francesa.
 
 Una fuente que no cites no aparece, y así debe ser: APA solo lista lo que se cita.
 
-> **Cuidado**
+> [!CAUTION]
 > En `docs/closing.md` hay un bloque que parece vacío y que no se debe borrar:
 >
 > ```markdown
