@@ -197,6 +197,11 @@ Solo tablas de tuberías.
 | AV1     | 02/04/2026 | Todos |
 ```
 
+Escribirlas a mano y mantener las tuberías alineadas es un dolor. Para armarlas usa
+[Tables Generator](https://www.tablesgenerator.com/markdown_tables): tiene una
+cuadrícula tipo hoja de cálculo, importa desde CSV, y te devuelve el Markdown ya
+formateado para pegar.
+
 > [!CAUTION]
 > Nunca uses `<table>` de HTML. Al exportar, Pandoc descarta el marcado y conserva
 > solo el texto, así que la tabla se convierte en párrafos sueltos, sin estructura y
