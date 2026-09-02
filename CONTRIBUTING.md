@@ -132,6 +132,23 @@ el check `no-ai-authorship` en verde, incluidos los administradores.
 
 ## Commits
 
+Los mensajes van **en inglés** y siguen [Conventional Commits](https://www.conventionalcommits.org):
+un tipo, dos puntos y qué hace el cambio.
+
+```
+feat: add user personas to chapter 2
+fix: correct the sprint 1 backlog table
+docs: update the version log
+```
+
+`feat` para contenido nuevo, `fix` para correcciones, `docs` para la documentación
+del repositorio y `chore` para configuración.
+
+> [!IMPORTANT]
+> El enunciado exige GitFlow y Conventional Commits, y los evalúa mirando el
+> historial y los analíticos de colaboración. No es una preferencia del equipo: es
+> parte de la nota, igual que el contenido del informe.
+
 El historial es evidencia que se califica, así que ningún commit puede atribuir
 autoría a una herramienta de IA. Hay dos controles, uno en tu máquina y otro en el
 servidor:
