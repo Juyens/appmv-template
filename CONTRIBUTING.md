@@ -59,19 +59,64 @@ dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf
 > La versión en texto del árbol, copiable y buscable, está en
 > `docs/images/tree.txt`.
 
-## Commits
+## Flujo de trabajo
 
-El historial es evidencia que se califica, así que ningún commit puede atribuir
-autoría a una herramienta de IA. Hay dos controles, uno en tu máquina y otro en el
-servidor:
+| Rama | Para qué sirve |
+| --- | --- |
+| `main` | Solo estados entregables. De aquí salen las entregas. |
+| `develop` | Donde se integra el trabajo del equipo. |
+| `feature/*` | Una por sección del informe. Vive uno o dos días. |
 
-| Control | Dónde actúa | Se salta con |
-| --- | --- | --- |
-| `.githooks/commit-msg` | Al hacer commit, en tu equipo | `git commit --no-verify` |
-| `commit-policy.yml` | En cada push y cada Pull Request | Nada |
+### Escribir una sección
 
-El hook lo activa `dependencies.ps1`. Si un commit ya salió con esa línea y todavía
-no lo subiste, `git commit --amend` lo arregla.
+Sales de `develop` actualizada y abres tu rama:
+
+```powershell
+git switch develop
+git pull
+git switch -c feature/2-3-needfinding
+```
+
+El nombre lleva el número de la sección y una palabra que la identifique. Así el
+historial dice quién escribió qué, que es parte de lo que se califica.
+
+Escribes, haces tus commits y cuando la sección esté lista la subes:
+
+```powershell
+git push -u origin feature/2-3-needfinding
+```
+
+Abres la Pull Request hacia `develop`, un compañero la revisa, y al mergear se borra
+la rama:
+
+```powershell
+gh pr merge --merge --delete-branch
+```
+
+Ese `--delete-branch` no es cosmético. En un ciclo se acumulan decenas de ramas y sin
+borrarlas nadie distingue las vivas de las terminadas.
+
+> [!TIP]
+> Cierra tus ramas rápido. Una rama abierta una semana acumula divergencia con
+> `develop` y termina en conflictos de cosas que ni tocaste. Si una sección te va a
+> llevar más de dos días, pártela.
+
+Como cada capítulo es un solo archivo, dos personas escribiendo a la vez en
+secciones distintas del mismo capítulo van a chocar al mergear la segunda rama. El
+conflicto se resuelve en un minuto, porque los dos bloques se conservan, pero
+conviene repartirse los capítulos para no toparse.
+
+### Entregar
+
+Cuando el informe está listo para AV1, TB1, AV2 o TB2, una Pull Request de `develop`
+a `main`. Es la única forma en que `main` cambia.
+
+Con eso mergeado, el tag dispara la compilación y publica el release con el PDF:
+
+```powershell
+git tag av1
+git push origin av1
+```
 
 ### Protección de ramas
 
@@ -88,6 +133,20 @@ el check `no-ai-authorship` en verde, incluidos los administradores.
 >
 > Las dos ramas tienen que existir en el remoto y el workflow tiene que haber
 > corrido al menos una vez, para que GitHub conozca el check.
+
+## Commits
+
+El historial es evidencia que se califica, así que ningún commit puede atribuir
+autoría a una herramienta de IA. Hay dos controles, uno en tu máquina y otro en el
+servidor:
+
+| Control | Dónde actúa | Se salta con |
+| --- | --- | --- |
+| `.githooks/commit-msg` | Al hacer commit, en tu equipo | `git commit --no-verify` |
+| `commit-policy.yml` | En cada push y cada Pull Request | Nada |
+
+El hook lo activa `dependencies.ps1`. Si un commit ya salió con esa línea y todavía
+no lo subiste, `git commit --amend` lo arregla.
 
 ## Convenciones de escritura
 
