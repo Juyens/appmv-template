@@ -50,7 +50,14 @@ dist/upc-pre-<periodo>-1acc0238-<nrc>-<startup>-report-<entrega>.pdf
 
 ## Estructura
 
-![Árbol del proyecto](docs/images/tree.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/tree-dark.svg">
+  <img alt="Árbol del proyecto" src="docs/images/tree.svg">
+</picture>
+
+> [!NOTE]
+> El árbol se edita en `docs/images/tree.txt` y se redibuja con
+> `.\scripts\tree.ps1`, que genera las dos versiones de color.
 
 ## Commits
 
